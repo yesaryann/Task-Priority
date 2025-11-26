@@ -274,11 +274,8 @@ The test suite includes:
 - Different sorting strategies
 - Individual component tests (urgency, importance, effort, dependencies)
 
-## License
 
-This project is created for assessment purposes.
 
-## Contact
 
-For questions or issues, please refer to the repository or contact the development team.
+
 
