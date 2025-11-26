@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Priority Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Priority Tool</h1>
+            <p class="subtitle">figure out what to do first</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <section class="input-section">
+                <h2>Add Tasks</h2>
+                
+                <!-- Strategy Selector -->
+                <div class="strategy-selector">
+                    <label for="strategy">how do you want to sort?</label>
+                    <select id="strategy" name="strategy">
+                        <option value="smart_balance">smart balance (default)</option>
+                        <option value="fastest_wins">fastest wins</option>
+                        <option value="high_impact">high impact</option>
+                        <option value="deadline_driven">deadline driven</option>
+                    </select>
+                    <span class="strategy-description" id="strategy-description">
+                        balances everything - urgency, importance, effort, dependencies
+                    </span>
+                </div>
+
+                <!-- Single Task Form -->
+                <div class="task-form-container">
+                    <h3>add a task</h3>
+                    <form id="task-form">
+                        <div class="form-group">
+                            <label for="title">what's the task? *</label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="due_date">when's it due?</label>
+                                <input type="date" id="due_date" name="due_date">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="estimated_hours">how long? (hours)</label>
+                                <input type="number" id="estimated_hours" name="estimated_hours" min="0" step="0.5">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="importance">how important? (1-10)</label>
+                                <input type="number" id="importance" name="importance" min="1" max="10" value="5">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dependencies">depends on? (comma separated)</label>
+                            <input type="text" id="dependencies" name="dependencies" placeholder="task1, task2">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">add it</button>
+                    </form>
+                </div>
+
+                <!-- Bulk JSON Input -->
+                <div class="bulk-input-container">
+                    <h3>or paste json here</h3>
+                    <textarea id="bulk-json" placeholder='[{"title": "Task 1", "due_date": "2025-11-30", "estimated_hours": 3, "importance": 8, "dependencies": []}]'></textarea>
+                    <button type="button" id="load-json-btn" class="btn btn-secondary">load tasks</button>
+                </div>
+
+                <!-- Task List -->
+                <div class="tasks-list-container">
+                    <h3>your tasks (<span id="task-count">0</span>)</h3>
+                    <div id="tasks-list"></div>
+                    <button type="button" id="clear-tasks-btn" class="btn btn-danger">clear all</button>
+                </div>
+
+                <!-- Analyze Button -->
+                <div class="analyze-section">
+                    <button type="button" id="analyze-btn" class="btn btn-success btn-large">figure it out</button>
+                    <div id="loading" class="loading hidden">
+                        <div class="spinner"></div>
+                        <span>thinking...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section class="output-section">
+                <h2>here's what to do</h2>
+                <div id="error-message" class="error-message hidden"></div>
+                <div id="results-container">
+                    <div class="empty-state">
+                        <p>add some tasks and hit "figure it out" to see what matters</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
